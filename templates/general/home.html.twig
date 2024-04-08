@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    
+    <h1>Om mig själv</h1>
+    <p class="author">Skriven av Karim Andersson, uppdaterad <time datetime="2024-04-07">2024-04-07</time>.</p>
+
+    <figure class="figure right">
+        <img src="{{ asset('img/me2.jpg') }}" width="200" alt="Bild på mig">
+        <figcaption>Karim Andersson</figcaption>
+    </figure>
+
+    <p>Karim Andersson heter jag och läser nu under våren 2024 kursen Objektorienterade webbteknologier
+        (mvc).</p>
+    <p>Förra läsåret läste jag python/JS-kurspaketet, och nu håller jag på med det andra,
+        även om jag nog kan väldigt mycket av det som gås igenom, då jag jobbat sedan ca 2002
+        med php och MySQL och ytterligare några år tidigare med html, och på vägen har jag också
+        lärt mig en del css och lite JS.</p>
+    <p>Till vardags jobbar jag som systemförvaltare (pm3) eller produktägare (scrum) på LTH i Lund,
+        men har även andra roller som projektledare, kravställare, och kodar även en del själv bl.a.
+        LTH:s kursutvärderingssystem "CEQ" och skriver en hel del skript (i php) för att automatisera
+        arbetsuppgifter, och utöver det använder jag mycket SQL för olika slags utdata och statistik.
+    </p>
+    <p>Området jag jobbar med är utbildningsadministration i allmänhet och i "närheten" av Ladok väldigt
+        ofta. Jag är även ansvrig för samordning för Ladokintegrationer på LU.</p>
+    <p>Ursprungligen studerade jag civilingenjör i Väg och vatten, så ingen IT-bakgrund där
+        (utöver grundkurs i Pascal och lite Matlab), så jag är primärt självlärd i det mesta. Syftet
+        med att läsa kurspaketen är dels att lära mig nytt (främst Python och JS) samt även att "täppa"
+        igen luckor som lätt uppstår när man är sjävlärd under lång tid.
+    </p>
+
+    <div class="byline">
+        <figure class="figure left bw">
+            <img src="{{ asset('img/me2.jpg') }}" width="100" alt="Bild på mig">
+            <figcaption>Karim Andersson</figcaption>
+        </figure>
+
+        <p><span class="bylineinit">Karim Andersson</span> läser kursen Objektorienterade webbteknologier (mvc)
+            på BTH under våren 2024. Till vardags arbetar han med systemförvaltning av olika 
+            studieadministrativa system  som t.ex. Ladok, utbildningsdatabas,
+            kursutvärderingssystem på LTH, och även med samordning av Ladok-integrationer på LU.
+        </p>
+    </div>
+{% endblock %}

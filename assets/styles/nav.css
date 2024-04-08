@@ -1,0 +1,52 @@
+.site-header {
+    background-size: cover;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-title {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+/* .inline {
+    display: flex;
+}
+
+.small-padding {
+    padding: 2px;
+} */
+
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav {
+    background-color: #111;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.nav ul li {
+    color: #eee;
+    text-decoration: none;
+    width: max-content;
+    display: inline-block;
+    /* padding: 5px; */
+}
+
+.nav ul li a {
+    color: #eee;
+    text-decoration: none;
+    padding: 1em;
+}
+
+.nav ul li a:hover {
+    color: #111;
+    background-color: skyblue;
+}

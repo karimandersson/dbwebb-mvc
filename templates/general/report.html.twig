@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Report{% endblock %}
+
+{% block body %}
+    <h1>Report</h1>
+    <p>Snabblänk till:
+        <a href="#kmom01">kmom01</a>
+        {# <a href="#kmom02">kmom02</a>
+        <a href="#kmom03">kmom03</a>
+        <a href="#kmom04">kmom04</a>
+        <a href="#kmom05">kmom05</a>
+        <a href="#kmom06">kmom06</a>
+        <a href="#kmom07">kmom10</a> #}
+    </p>
+
+    <section id="kmom01">
+    <h2>Kmom01</h2>
+        <h3>Berätta kort om dina förkunskaper och tidigare erfarenheter kring objektorientering.</h3>
+        <p>Jag har inte jobbat vidare mycket med objektorientering själv, utöver då att ha läst oopython-kursen
+            förra våren. Däremot har jag kommit i kontakt med det genom mitt jobb i olika projekt som jag
+            inte jobbat med själv, men ibland tittat på källkod. Dock har jag avnänt en del PHP-klasser
+            som i sig är objektorienterade, t.ex. generella som mysqli och även en del specifika från 
+            öppna projekt eller interna som vi använt på arbetet.
+        </p>
+        <h3>Berätta kort om PHPs modell för klasser och objekt. Vilka är de grunder man behöver veta/förstå 
+            för att kunna komma igång och skapa sina första klasser?</h3>
+        <p>En klass kan sägas vara en mall för objekt. Objekt i sig är en representation av någonting som
+            håller sig inom mallen som klassen utgör. Objektet har olika egenskaper i form av värden
+            och s.k. metoder/funktion som kan utföras på objektet. Dessa egenskaper definieras av klassen,
+            och utförs sedan på objektet i fråga, med användning av dets värden. Ett exmepel kan vara
+            klassen bil som har värden märke, färg och turfrekvens och metoderna tuta och kör, och ett objekt
+            kan vara bil1 som är är Ford, gul och har låg tutfrekven, och bil2 som är Volvo, grön och har 
+            hög tutfrekvens. När man anropar metoden tuta på bil1 får man ett lågt ljud, men samma metod
+            på bil2 ger ett högt ljud.</p>
+        <p>Beroende på hur klasserna är utformade kan det krävas initialvärden när man skapar objekten, men
+            det kan också vara valfritt, eller att klasserna har defaultvärden om man inte själv anger dem.
+            Det kan även finnas värden som är kopplade till klassen i sig, s.k. statiska värden.
+        </p>
+        <p>Det finns regler som styr om man kan accessa värden eller metoder på objeket utifrån.</p>
+        <h3>Reflektera kort över den kodbas, koden, strukturen som användes till uppgiften me/report, 
+            hur uppfattar du den?</h3>
+        <p>Jag börjar känna igen kodstrukturen ganska mycket från andra kurser, med dels kontrollfunktioner
+            av olika salg och sedan mallar som ger layouten på sidorna man skapar, och sist statiska 
+            filer för bilder, css:er och egenskapad ja-kod (filerna är egentligen inte alltid statiska,
+            utan "packeteras" på olika sätt). Sedan är Symfony i sig mer avancerat än vad vi använt hitills,
+            och sannolikt mycket komplext och kometent. Men vi har fått bra guidning till hur man ska börja.
+            Uppedelningen i routrar känns också igen från andra kurser.
+        </p>
+        <h3>Med tanke på artikeln “PHP The Right Way”, vilka delar in den finner du extra intressanta 
+            och värdefulla? Är det några särskilda områden som du känner att du vill veta mer om? Lyft 
+            fram några delar av artikeln som du känner mer värdefulla.</h3>
+        <p>Mest nyttigt tyckte jag avsnittet om "Dependency Management". Inte helt nytt, då vi använt detta
+            i flera kurser nu, men likväl alltid bra att läsa om. "Design patterns" tänkter jag lägga i min
+            "att läsa"-lista och titta på mer vid tillfälle. Tydlig kodstruktur är också något jag borde
+            ägna tid åt. Och sedna lära mig mer om de moderna tillägg som gjorts i php på senare år (from
+            v 5.4) och som ganska uppenbart motsvarar de möjlighet som kommit i modern javascript (anonyma
+            funktioner osv.). Sedan blev jag lite "uppskrämd" av avsnittet om UTF-8, och jag har själv
+            en del kod som är skriven i latin1 och ännu inte översatt/omkodad. Inför mvc-kursen ser jag
+            också fram emot avsnittet med enhetstestning.
+        </p>
+        <h3>Vilken är din TIL för detta kmom?</h3>
+        <p>Att ha börjat sätta mig in i ramverket Symfony. Tidigare har jag mest använt PHP utan egentliga
+            ramverk (utöver "smala" ramverk som mest varit till för layout/grafisk profil), om än tillsammans
+            med klasspaket för enskilda uppgifter/funktioner.
+        </p>
+
+    {# <section id="kmom02">
+    <h2>Kmom02</h2> #}
+
+    {# <section id="kmom03">
+    <h2>Kmom03</h2> #}
+
+    {# <section id="kmom04">
+    <h2>Kmom04</h2> #}
+
+    {# <section id="kmom05">
+    <h2>Kmom05</h2> #}
+
+    {# <section id="kmom06">
+    <h2>Kmom06</h2> #}
+
+    {# <section id="kmom007">
+    <h2>Kmom10</h2> #}
+
+{% endblock %}

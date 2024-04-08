@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Lucky{% endblock %}
+
+{% block allmain %}
+    <main class="crazy">
+        <h1>Lucky-sidan</h1>
+        <h2>Dagens tågbilder</h2>
+        <p>Ladda om sidan för att (förhoppningsvis) se nya bilder!</p>
+        <div class="crazywidth">
+            <div class="grid crazycolumns">
+                <div>
+                    <img src="{{ asset('img/trains/' ~ pic1  ~ '.jpg') }}" class="imgcontain">
+                    
+                </div>
+                <div>
+                    <img src="{{ asset('img/trains/' ~ pic2  ~ '.jpg') }}" class="imgcontain">
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

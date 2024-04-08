@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+    <h1>About</h1>
+    <div class="grid aboutcolumns">
+        <div>
+            <h2>Kursen MVC</h2>
+            <p>Kursen Objektorienterade webbteknologier, a.k.a. mvc, fokuserar på objektorienterade 
+                programmeringstekniker i programmeringsspråket PHP. Klassiska objektorienterade konstruktioner 
+                hanteras tillsammans med objektorienterad programmering i webbaserat ramverk tillsammans med 
+                databaser samt enhetstestning.</p>
+            <h3>Kursens innehåll</h3>
+            <ul>
+                <li>Programmering i webbmiljö, syntax, semantik, koppling mot databaser, datastrukturer och inbyggda funktioner.</li>
+                <li>Objektorienterad programmering i PHP med språkkonstruktioner och begrepp. Objektorientering som sätt att strukturera och återanvända kod. Enkla designmönster.</li>
+                <li>SQL med en databas tillsammans med PHP Data Objects.</li>
+                <li>Utveckling av webbapplikationer i ett ramverk där tekniker såsom webbserver (Apache), PHP, HTML, CSS, och SQL integreras tillsammans med ett webbaserat ramverk.</li>
+                <li>Användning av verktyg och tekniker som lämpar sig för utveckling av webbapplikationer, tex UNIX/Linux, installation på extern webbserver, ssh, ftp/sftp, databasklienter såsom PHPMyAdmin, MySQL Workbench och kommandoklienter.</li>
+            </ul>
+            <h3>Kursens mål</h3>
+            <p><strong>Kunskap och förståelse</strong></p>
+            <p>Efter genomförd kurs skall studenten:</p>
+            <ul>
+                <li>kunna redogöra för utveckling med objektorienterad programmering och databaser i webbmiljö, genom att skriftligen beskriva och sammanfatta erfarenheter och observationer från övningar och projekt.</li>
+            </ul>
+            <p><strong>Färdighet och förmåga</strong></p>
+            <p>Efter genomförd kurs skall studenten:</p>
+            <ul>
+                <li>kunna tillämpa de objektorienterade programmeringsparadigmen genom praktiska övningar och projekt.</li>
+                <li>självständigt, utefter en specifikation, kunna utveckla och driftsätta en webbapplikation där objektorienterad programmering i ramverk tillsammans med databaser har en central roll.</li>
+                <li>kunna hantera de verktyg och miljöer som används vid utveckling av databasdrivna webbapplikationer i ett ramverk för webbutveckling.</li>
+
+            </ul>
+            <p><strong>Värderingsförmåga och förhållningssätt</strong></p>
+            <p>Efter genomförd kurs skall studenten:</p>
+            <ul>
+                <li>översiktligt förstå, kunna förklara samt argumentera kring objektorienterad programmering i ett webbaserat ramverk.</li>
+            </ul>
+            
+            <figure>
+                <img class="imgcontain" src="{{ asset('img/mvc.png') }}" alt="picture that shows mvc-structure">
+                <figcaption class="figcaption">Bild från <a href="https://www.geeksforgeeks.org/mvc-framework-introduction/">https://www.geeksforgeeks.org/mvc-framework-introduction/</a></figcaption>
+            </figure>
+        </div>
+        <div>
+            <ul>
+                <li><a href="https://dbwebb.se/kurser/mvc-v2">Kursens hemsida</a></li>
+                <li><a href="https://github.com/dbwebb-se/mvc">Kursens Git-repo</a></li>
+                <li><a href="https://github.com/karimandersson/dbwebb-mvc">Projektets Git-repo</a></li>
+            </ul>
+            
+        </div>
+    </div>
+{% endblock %}

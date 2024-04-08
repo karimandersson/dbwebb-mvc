@@ -1,0 +1,36 @@
+footer {
+    background-color: #111;
+    color: #eee;
+    padding: 2em;
+    margin-top: auto;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer ul {
+    display: flex;
+    align-items: center;
+}
+
+.footer ul li {
+    color: #eee;
+    text-decoration: none;
+    width: max-content;
+    display: inline-block;
+    padding: 5px;
+}
+
+.footer ul li a {
+    color: #eee;
+    text-decoration: none;
+    padding: 1em;
+}
+
+.footer ul li a:hover {
+    color: #111;
+    background-color: skyblue;
+}

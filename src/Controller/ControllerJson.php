@@ -8,18 +8,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ControllerJson
 {
-        // $response = new Response();
-        // $response->setContent(json_encode($data));
-        // $response->headers->set('Content-Type', 'application/json');
-        // return $response;
+    // $response = new Response();
+    // $response->setContent(json_encode($data));
+    // $response->headers->set('Content-Type', 'application/json');
+    // return $response;
 
-        // return new JsonResponse($data);
+    // return new JsonResponse($data);
 
-        // $response = new JsonResponse($data);
-        // $response->setEncodingOptions(
-        //     $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        // );
-        // return $response;
+    // $response = new JsonResponse($data);
+    // $response->setEncodingOptions(
+    //     $response->getEncodingOptions() | JSON_PRETTY_PRINT
+    // );
+    // return $response;
 
     #[Route("/api/quote", name: "apiquote")]
     public function jsonQuote(): Response
@@ -46,5 +46,4 @@ class ControllerJson
         );
         return $response;
     }
-
 }

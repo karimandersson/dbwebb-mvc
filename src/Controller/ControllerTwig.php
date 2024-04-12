@@ -52,14 +52,14 @@ class ControllerTwig extends AbstractController
             'pic12'
         ];
 
-        $lucky1 = random_int(0, count($trains) -1);
+        $lucky1 = random_int(0, count($trains) - 1);
         do {
-            $lucky2 = random_int(0, count($trains) -1);
+            $lucky2 = random_int(0, count($trains) - 1);
         } while ($lucky2 == $lucky1);
 
         $data["pic1"] = $trains[$lucky1];
         $data["pic2"] = $trains[$lucky2];
-        
+
         return $this->render('general/lucky.html.twig', $data);
     }
 

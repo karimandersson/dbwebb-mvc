@@ -103,3 +103,41 @@ main.crazy {
     /* padding: 60px; */
     column-gap: 3em;
 }
+
+/* For pig game */
+input {
+    font-size: 1em;
+}
+
+/* h1 {
+    border-bottom: 4px double green;
+} */
+
+.die {
+    font-size: 3em;
+}
+/* /For pig game */
+
+ul.dicehand li {
+    font-size: 2em;
+}
+
+.flash-notice {
+    padding: 0.5em;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+.flash-notice:before {
+    content: "ⓘ";
+}
+
+.flash-warning {
+    padding: 0.5em;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.flash-warning:before {
+    content: "⚠";
+}

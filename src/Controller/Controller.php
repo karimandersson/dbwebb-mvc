@@ -25,5 +25,4 @@ class Controller
     //         '<html><body>Hi to you!</body></html>'
     //     );
     // }
-
 }

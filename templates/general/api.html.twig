@@ -5,9 +5,27 @@
 {% block body %}
     <h1>API</h1>
     <p>Här visas länkar till alla api som finns på webbplatsen.</p>
-    <ul>
+    <ul class="apilist">
         {% for api in apilist %}
-            <li><a href="{{ path(api.routename) }}">{{ api.text }}</a></li>
+            <li>{{ api.method|upper }} 
+                {% if api.method=='post' %}
+                    <form action="{{ path(api.routename) }}" method="post">
+                        {% if api.fields|length > 0 %}
+                            {% for field in api.fields %}
+                                {{ field.name }}: 
+                                <input type="number" name="{{ field.name }}" min="{{ field.min }}" max="{{ field.max }}" value="1" size="5">
+                            {% endfor%}
+                        {% endif %}
+                        <button type="submit" 
+                        {% if api.on_click %}
+                            onClick="{{ api.on_click }}"
+                        {% endif %}
+                        class="btn-link">{{ api.url|slice(1) }}</button> {{ api.text }}
+                    </form>
+                {% else %}
+                    <a href="{{ path(api.routename) }}">{{ api.url|slice(1) }}</a> {{ api.text }}
+                {% endif %}
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

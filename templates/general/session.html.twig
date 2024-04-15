@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Session{% endblock %}
+
+{% block body %}
+<h1>Session</h1>
+
+<form method="post" action="">
+    <p>
+        <input type="submit" name="clear" value="Clear session"
+            onClick="this.form.action='{{ path('session_delete') }}';this.form.method='get';"
+        >
+    </p>
+</form>
+
+{{ include('general/flash.html.twig') }}
+
+<script>console.log('{{ sessionJSON|e('js') }}')</script>
+<p>The session contains:</p>
+{{ dump(session) }}
+{% endblock %}

@@ -141,3 +141,51 @@ ul.dicehand li {
 .flash-warning:before {
     content: "⚠";
 }
+
+.cards {
+    display: block;
+}
+
+.card_graphic {
+    width: 80px;
+    border: 3px solid black;
+    border-radius: 5%;
+    padding: 3px;
+}
+
+.small_menu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 5px;
+}
+
+.small_menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+.small_menu ul li {
+    text-decoration: none;
+    width: max-content;
+    display: inline-block;
+    padding-left: 5px;
+}
+
+.apilist li form {
+    display:inline
+}
+
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: #0000EE;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+}

@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Card game</h1>
+{{ include('card/small_menu.html.twig') }}
+
+{{ include('general/flash.html.twig') }}
+
+{% if hands %}
+    <h2>The players cards</h2>
+    {% for player in hands %}
+    <h3>{{ player.name }}</h3>
+        <div class="cards">
+            {% for card in player.hand %}
+                {% if card[1] %}
+                    <img src="{{ asset(card[1]) }}" class="card_graphic" alt="{{ card[0] }}">
+                {% else %}
+                    {{ card[0] }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<h2>Cards left in Deck</h2>
+<div class="cards">
+    {% for card in deck %}
+        {% if card[1] %}
+            <img src="{{ asset(card[1]) }}" class="card_graphic" alt="{{ card[0] }}">
+        {% else %}
+            {{ card[0] }}
+        {% endif %}
+    {% endfor %}
+</div>
+
+{# {{ dump(session) }} #}
+
+{% endblock %}

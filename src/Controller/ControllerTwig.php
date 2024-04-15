@@ -71,7 +71,67 @@ class ControllerTwig extends AbstractController
             [
                 "url" => "./api/quote",
                 "routename" => "apiquote",
-                "text" => "/api/quote : Dagens citat"
+                "text" => "Dagens citat",
+                "method" => "get",
+            ],
+            [
+                "url" => "./api/deck",
+                "routename" => "api_card_deck",
+                "text" => "Visar kortlek, både aktuell och sorterad full kortlek",
+                "method" => "get",
+            ],
+            [
+                "url" => "./api/deck/shuffle",
+                "routename" => "api_card_deck_shuffle",
+                "text" => "Blandar kortleken, och återställer till full storlek vid behov",
+                "method" => "post",
+                "fields" => [],
+                "on_click" => ""
+            ],
+            [
+                "url" => "./api/deck/draw",
+                "routename" => "api_card_draw",
+                "text" => "Drar 1 kort",
+                "method" => "post",
+                "fields" => [],
+                "on_click" => ""
+            ],
+            [
+                "url" => "./api/deck/draw/:number",
+                "routename" => "api_card_draw_num",
+                "text" => "Drar :number kort",
+                "method" => "post",
+                "fields" => [
+                    [
+                        "text" => "Antal kort",
+                        "name" => 'number',
+                        "min" => 1,
+                        "max" => 52
+                    ]
+                ],
+                "on_click" => "this.form.action='". $this->generateUrl('api_card_draw') ."' + '/' + this.form.number.value"
+            ],
+            [
+                "url" => "./api/deck/deal/:num_players/:num_cards",
+                "routename" => "api_card_deal",
+                "text" => "Delar ut :num_cards kort till :num_players spelare",
+                "method" => "post",
+                "fields" => [
+                    [
+                        "text" => "Antal spelare",
+                        "name" => 'num_players',
+                        "min" => 1,
+                        "max" => 10
+                    ],
+                    [
+                        "text" => "Antal kort",
+                        "name" => 'num_cards',
+                        "min" => 1,
+                        "max" => 52
+                    ]
+                ],
+                "on_click" => "this.form.action='" . $this->generateUrl('api_card_deal') . "' 
+                    + '/' + this.form.num_players.value + '/' + this.form.num_cards.value"
             ]
         ];
 

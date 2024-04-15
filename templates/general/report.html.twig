@@ -6,12 +6,12 @@
     <h1>Report</h1>
     <p>Snabblänk till:
         <a href="#kmom01">kmom01</a>
-        {# <a href="#kmom02">kmom02</a>
-        <a href="#kmom03">kmom03</a>
-        <a href="#kmom04">kmom04</a>
-        <a href="#kmom05">kmom05</a>
-        <a href="#kmom06">kmom06</a>
-        <a href="#kmom07">kmom10</a> #}
+        <a href="#kmom02">kmom02</a>
+        {# <a href="#kmom03">kmom03</a> #}
+        {# <a href="#kmom04">kmom04</a> #}
+        {# <a href="#kmom05">kmom05</a> #}
+        {# <a href="#kmom06">kmom06</a> #}
+        {# <a href="#kmom07">kmom10</a> #}
     </p>
 
     <section id="kmom01">
@@ -65,8 +65,60 @@
             med klasspaket för enskilda uppgifter/funktioner.
         </p>
 
-    {# <section id="kmom02">
-    <h2>Kmom02</h2> #}
+    <section id="kmom02">
+    <h2>Kmom02</h2>
+        <h3>Förklara kort de objektorienterade konstruktionerna arv, komposition, interface och trait och 
+            hur de används i PHP.</h3>
+        <p><strong>Arv:</strong> Arv är en metod för att bygga mer specialiserade klasser av andra. Ett typexempel
+            är moderklassen Bil där t.ex. Elbil kan vara en klass som ärver från Bil. Många egenskaper är samma, och
+            man använder egenskaper från moderklassen till stor del, men motorn är utbytt mot en elmotor, och
+            bränsletanken är utbytt mot batterier.</p>
+        <p><strong>Komposition:</strong> Komposition är när man använder objekt av andra klasser i den aktuella.
+            Det kan t.ex. röra sig om Bil:ar i ett Garage, Kort i en Hand, Student:er i en Kurs och liknande.</p>
+        <p><strong>Interface:</strong> Interface beskriver att vissa motoder alltid ska finnas i samtliga klasser
+            som implementerar interfacet (och dessa klasser kan sinsemellan vara fristående eller använda arv). Det
+            kan ses som ett slags kontrakt, så att man kan lita på att dessa metoder går att använda på ingående
+            klasser.</p>
+        <p><strong>Trait:</strong>Trait är en slags återanvänd kod, som kan implementeras i flera klasser. I
+            samtliga klasser som använder traitet kan man sedan använda de attribut och metoder precis som om
+            de befann sig i den egna klassen. Dessa blir då exakt samma för alla dessa klasser.
+        </p>
+        <h3>Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken
+            förbättringspotential ser du i din koden och dina klasser?</h3>
+        <p>Jag tycker jag fått till en bra lösning. Fyra klasser (avrav ett arv gällande grafiskt spelkort). 
+            Hade jag inte gjort extrauppgiften hade inte CardHand behövts. Card-klassen innehåller några metoder
+            som inte används aktivt, men jag förberedde dem för några olika användningsområden så ville inte ta
+            bort dem. Däremot lyckades jag rationallisera lite ändå, för i DeckOfCards hade jag först 2 draw-metoder,
+            en för grafiskt kort och en för kort-objekt. Men där ändrade jag så att draw-metoden tar 2 parametrar
+            istället, hur många kort (int) samt bool för om objekt ska returneras eller inte (om inte returneras 
+            grafisk representation).
+        </p>
+        <p>Sedan blev det ganska "pillit" med att det skulle vara POST i api:t. Jag satt ganska länge och försökte
+            (=googlade) hur man gör om en a-tag till post med js. Men den enda lösningen verkar vara att göra 
+            en form/button som grafiskt ser ut som en länk. Så det blev så. 
+        </p>
+        <p>Förbättringpotintial är att lägga till ett interface (i så fall främst gällande showCard-metoden). 
+            Sedan tycker jag att det blivit en hel del upprepning i GUI- resp API-kontrollklasserna. Kanske man
+            kunnat organisera det lite annorlunda. Men samtidigt skiljer det sig åt i små detaljer hela tiden,
+            så kanske ändå inte helt enkelt att "förenkla" koden (utan att den växer på annat sätt). utöver
+            det så lydde jag inte rådet att committa små ändringar åt gången, utan kom på att jag borde gjort
+            det tidigare när jag i princip var helt klar. Så det fick bli en masscommit för hela kursmomentet.
+            Ska försöka tänka på det till nästa kursmoment.
+        </p>
+        <h3>Vilka är dina reflektioner så här långt med att jobb i Symfony med applikationskod enligt MVC?</h3>
+        <p>När man väl kommit igång med klasserna och att det var så enkelt att spara objekten direkt i 
+            sessionen flöt allt på bra. Väldigt smidigt att slippa behöva bry sig om att serialisera objektekten
+            före man sparar i sessionen (vilket jag vill minnas att man behövde i oopythonkursen som jag läste
+            förra våren). Sedan känns det något långsamt när man använder Symfony i exakt samma WSL-installation
+            som jag körde Express/JS i förra kursen. Men så är för all del Symfone ett mycket mer omfattande
+            ramverk.
+        </p>
+        <h3>Vilken är din TIL för detta kmom?</h3>
+        <p>Även om jag jag inte implementerade varken interface eller traits i koden, så tyckte jag att jag
+            fick mer färdighet i att implementera och hantera klasser. Som jag skrev till kmom01 har jag 
+            inte skrivit så mycket objektorienterad kod själv, utan mest bara använt dem i ganska avgränsade
+            fall.
+        </p>
 
     {# <section id="kmom03">
     <h2>Kmom03</h2> #}

@@ -4,10 +4,11 @@ namespace App\Card;
 
 class CardHand
 {
-    private $hand = [];
-    private $name;
+    /** @var array<Card> */
+    private array $hand = [];
+    private string $name;
 
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->name = $name;
     }
@@ -22,6 +23,9 @@ class CardHand
         $this->hand[] = $card;
     }
 
+    /**
+     * @return array<int, array{string, string|null}>
+     */
     public function showHand(): array
     {
         $hand_array = [];

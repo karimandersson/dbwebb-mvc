@@ -4,13 +4,15 @@ namespace App\Card;
 
 class Card
 {
-    protected $color;
-    protected $value;
+    protected int $color;
+    protected int $value;
 
-    protected $colors = ['clubs', 'diamonds', 'hearts', 'spades'];
-    protected $values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    /** @var array<string> */
+    protected array $colors = ['clubs', 'diamonds', 'hearts', 'spades'];
+    /** @var array<string> */
+    protected array $values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
-    public function __construct($color, $value)
+    public function __construct(int $color, int $value)
     {
         $this->color = $color;
         $this->value = $value;
@@ -41,12 +43,18 @@ class Card
         return "[" . substr($this->colors[$this->color], 0, 1) . "-{$this->values[$this->value]}]";
     }
 
+    /**
+     * @return array{string, ?string}
+     */
     public function showCard(): array
     {
         // Return array of text representation and an empty placeholder for graphic representation
         return [$this->getAsShortString(), null];
     }
 
+    /**
+     * @return array{string, ?string}
+     */
     public function showBack(): array
     {
         // Return array of text representation and an empty placeholder for graphic representation

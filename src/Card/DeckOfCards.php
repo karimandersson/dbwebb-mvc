@@ -4,7 +4,8 @@ namespace App\Card;
 
 class DeckOfCards
 {
-    private $deck = [];
+    /** @var array<Card> */
+    private array $deck = [];
 
     public function __construct()
     {
@@ -21,6 +22,9 @@ class DeckOfCards
         shuffle($this->deck);
     }
 
+    /**
+     * @return array<int, array{string, string|null}>
+     */
     public function showDeck(): array
     {
         $deck_array = [];
@@ -33,7 +37,10 @@ class DeckOfCards
         return $deck_array;
     }
 
-    public function draw($num = 1, $returnObject = false): array
+    /**
+     * @return array<int, Card|array{string, string|null}|null>
+     */
+    public function draw(int $num = 1, bool $returnObject = false): array
     {
         $drawed_cards = [];
         if ($num > 0 && $num <= count($this->deck)) {

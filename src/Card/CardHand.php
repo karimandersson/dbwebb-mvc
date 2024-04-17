@@ -28,12 +28,12 @@ class CardHand
      */
     public function showHand(): array
     {
-        $hand_array = [];
+        $handArray = [];
         foreach ($this->hand as $card) {
-            $hand_array[] = $card->showCard();
+            $handArray[] = $card->showCard();
         }
 
-        return $hand_array;
+        return $handArray;
     }
 
     public function cardsInHand(): int

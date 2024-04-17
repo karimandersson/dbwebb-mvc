@@ -46,10 +46,10 @@ class CardGameController extends AbstractController
         }
 
         // New init deck. Do not shuffle!
-        $init_deck = new DeckOfCards();
+        $initDeck = new DeckOfCards();
 
         $data = [
-            "init_deck" => $init_deck->showDeck(),
+            "init_deck" => $initDeck->showDeck(),
             "deck" => $deck->showDeck(),
             "session" => $session->all()
         ];
@@ -58,11 +58,11 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/game/card/deck/shuffle", name: "card_deck_shuffle")]
-    public function deck_shuffle(
+    public function deckShuffle(
         SessionInterface $session
     ): Response {
 
-        $new_deck = false;
+        $newDeck = false;
 
         // Get deck or init
         if ($session->get("card_deck") === null) {
@@ -76,7 +76,7 @@ class CardGameController extends AbstractController
         // If deck is empty, reintialize
         if ($deck->cardsInDeck() == 0) {
             unset($deck);
-            $new_deck = true;
+            $newDeck = true;
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
@@ -88,7 +88,7 @@ class CardGameController extends AbstractController
         // Save to session
         $session->set("card_deck", $deck);
 
-        if ($new_deck) {
+        if ($newDeck) {
             $this->addFlash(
                 'notice',
                 'The old deck was empty. You got a new deck.'
@@ -105,8 +105,7 @@ class CardGameController extends AbstractController
 
     #[Route("/game/card/deck/draw", name: "card_draw")]
     public function draw(
-        Request $request,
-        SessionInterface $session
+        Request $request
     ): Response {
         // Get number of cards from start page
         if ($request->query->get('num_cards')) {
@@ -121,8 +120,7 @@ class CardGameController extends AbstractController
 
     // #[Route("/game/card/deck/draw/{num}", name: "card_draw_num")]
     #[Route("/game/card/deck/draw/{num<\d+>}", name: "card_draw_num")]
-    public function draw_num(
-        Request $request,
+    public function drawNum(
         SessionInterface $session,
         // If I set $num to 1, it will be redirect error, but default value can't
         // be omitted, because then it will be error of not having all parameters
@@ -138,15 +136,15 @@ class CardGameController extends AbstractController
         }
 
         if ($num == 0) {
-            $drawed_cards = [];
+            $drawedCards = [];
             $this->addFlash(
                 'warning',
                 'You can\'t draw 0 cards.'
             );
         } elseif ($num <= $deck->cardsInDeck()) {
-            $drawed_cards = $deck->draw($num, false);
+            $drawedCards = $deck->draw($num, false);
         } else {
-            $drawed_cards = [];
+            $drawedCards = [];
             $this->addFlash(
                 'warning',
                 'You can\'t draw more cards than there is in the deck.'
@@ -154,21 +152,20 @@ class CardGameController extends AbstractController
         }
 
         $data = [
-            "drawed" => $drawed_cards,
+            "drawed" => $drawedCards,
             "cards_left" => $deck->cardsInDeck()
         ];
 
         return $this->render('card/draw.html.twig', $data);
     }
 
-    #[Route("/game/card/deck/deal/{num_players<\d+>}/{num_cards<\d+>}", name: "card_deal")]
+    #[Route("/game/card/deck/deal/{numPlayers<\d+>}/{numCards<\d+>}", name: "card_deal")]
     public function deal(
-        Request $request,
         SessionInterface $session,
         // If I set $num to 1, it will be redirect error, but default value can't
         // be omitted, because then it will be error of not having all parameters
-        int $num_players = 0,
-        int $num_cards = 0
+        int $numPlayers = 0,
+        int $numCards = 0
     ): Response {
 
         // Get deck or init
@@ -181,14 +178,13 @@ class CardGameController extends AbstractController
         }
 
         // Do some controlls, and send to home with message if not fullfilled
-        if ($num_cards == 0 || $num_players == 0) {
-            $drawed_cards = [];
+        if ($numCards == 0 || $numPlayers == 0) {
             $this->addFlash(
                 'warning',
                 'You can\'t draw 0 cards and can\'t have 0 players.'
             );
             return $this->render('card/home.html.twig');
-        } elseif ($num_cards * $num_players > $deck->cardsInDeck()) {
+        } elseif ($numCards * $numPlayers > $deck->cardsInDeck()) {
             $this->addFlash(
                 'warning',
                 'You can\'t draw more cards than there is in the deck (' . $deck->cardsInDeck() . ').'
@@ -198,17 +194,17 @@ class CardGameController extends AbstractController
         // All controlls are passed
 
         // Set number of players to session
-        $session->set("num_players", $num_players);
+        $session->set("num_players", $numPlayers);
 
         // Create players=HandOfCards
         $players = [];
-        for ($i = 1; $i <= $num_players; $i++) {
+        for ($i = 1; $i <= $numPlayers; $i++) {
             $players[] = new CardHand('Player'.$i);
         }
 
         // Deal cards
         foreach($players as $player) {
-            for ($i = 1; $i <= $num_cards; $i++) {
+            for ($i = 1; $i <= $numCards; $i++) {
                 // Draw 1 card, returns array with 1 card
                 $draw = $deck->draw(1, true);
                 $player->add($draw[0]);

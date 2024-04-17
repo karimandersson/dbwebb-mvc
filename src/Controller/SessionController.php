@@ -14,7 +14,7 @@ class SessionController extends AbstractController
     * Home
     */
     #[Route("/session", name: "session_show", methods: ['GET'])]
-    public function session_home(
+    public function sessionHome(
         SessionInterface $session
     ): Response {
         $data = [
@@ -26,7 +26,7 @@ class SessionController extends AbstractController
     }
 
     #[Route("/session/delete", name: "session_delete", methods: ['GET'])]
-    public function session_delete(
+    public function sessionDelete(
         SessionInterface $session
     ): Response {
         $session->clear();

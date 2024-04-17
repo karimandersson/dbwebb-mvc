@@ -27,14 +27,14 @@ class DeckOfCards
      */
     public function showDeck(): array
     {
-        $deck_array = [];
+        $deckArray = [];
         foreach ($this->deck as $card) {
-            // $deck_array[] = $card->getAsShortString();
-            // $deck_array[] = $card->getAsString();
-            $deck_array[] = $card->showCard();
+            // $deckArray[] = $card->getAsShortString();
+            // $deckArray[] = $card->getAsString();
+            $deckArray[] = $card->showCard();
         }
 
-        return $deck_array;
+        return $deckArray;
     }
 
     /**
@@ -42,19 +42,19 @@ class DeckOfCards
      */
     public function draw(int $num = 1, bool $returnObject = false): array
     {
-        $drawed_cards = [];
+        $drawedCards = [];
         if ($num > 0 && $num <= count($this->deck)) {
             for ($i = 0; $i < $num; $i++) {
                 // Return representation or object of Card
                 if ($returnObject) {
-                    $drawed_cards[] = array_shift($this->deck);
+                    $drawedCards[] = array_shift($this->deck);
                 } else {
-                    $drawed_cards[] = array_shift($this->deck)->showCard();
+                    $drawedCards[] = array_shift($this->deck)->showCard();
                 }
             }
         }
 
-        return $drawed_cards;
+        return $drawedCards;
     }
 
     public function cardsInDeck(): int

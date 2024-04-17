@@ -57,6 +57,7 @@ class ControllerTwig extends AbstractController
             $lucky2 = random_int(0, count($trains) - 1);
         } while ($lucky2 == $lucky1);
 
+        $data = [];
         $data["pic1"] = $trains[$lucky1];
         $data["pic2"] = $trains[$lucky2];
 

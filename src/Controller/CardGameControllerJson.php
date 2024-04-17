@@ -35,11 +35,11 @@ class CardGameControllerJson extends AbstractController
         }
 
         // New init deck. Do not shuffle!
-        $init_deck = new DeckOfCards();
+        $initDeck = new DeckOfCards();
 
         $data = [
             "deck" => $deck->showDeck(),
-            "init_deck" => $init_deck->showDeck()
+            "init_deck" => $initDeck->showDeck()
         ];
 
         $response = new JsonResponse($data);
@@ -50,7 +50,7 @@ class CardGameControllerJson extends AbstractController
     }
 
     #[Route("/api/deck/shuffle", name: "api_card_deck_shuffle", methods: ['POST'])]
-    public function deck_shuffle(
+    public function deckShuffle(
         SessionInterface $session
     ): Response {
 
@@ -90,7 +90,6 @@ class CardGameControllerJson extends AbstractController
 
     #[Route("/api/deck/draw", name: "api_card_draw", methods: ['POST'])]
     public function draw(
-        Request $request,
         SessionInterface $session
     ): Response {
         $num = 1;
@@ -106,14 +105,14 @@ class CardGameControllerJson extends AbstractController
 
         $message = '';
         if ($num <= $deck->cardsInDeck()) {
-            $drawed_cards = $deck->draw($num, false);
+            $drawedCards = $deck->draw($num, false);
         } else {
-            $drawed_cards = [];
+            $drawedCards = [];
             $message = 'You can\'t draw more cards than there is in the deck.';
         }
 
         $data = [
-            "drawed" => $drawed_cards,
+            "drawed" => $drawedCards,
             "cards_left" => $deck->cardsInDeck(),
             "messasge" => $message
         ];
@@ -126,8 +125,7 @@ class CardGameControllerJson extends AbstractController
     }
 
     #[Route("/api/deck/draw/{num<\d+>}", name: "api_card_draw_num", methods: ['POST'])]
-    public function draw_num(
-        Request $request,
+    public function drawNum(
         SessionInterface $session,
         // If I set $num to 1, it will be redirect error, but default value can't
         // be omitted, because then it will be error of not having all parameters
@@ -144,17 +142,17 @@ class CardGameControllerJson extends AbstractController
 
         $message = '';
         if ($num == 0) {
-            $drawed_cards = [];
+            $drawedCards = [];
             $message = 'You can\'t draw 0 cards.';
         } elseif ($num <= $deck->cardsInDeck()) {
-            $drawed_cards = $deck->draw($num, false);
+            $drawedCards = $deck->draw($num, false);
         } else {
-            $drawed_cards = [];
+            $drawedCards = [];
             $message = 'You can\'t draw more cards than there is in the deck.';
         }
 
         $data = [
-            "drawed" => $drawed_cards,
+            "drawed" => $drawedCards,
             "cards_left" => $deck->cardsInDeck(),
             "messasge" => $message
         ];
@@ -166,14 +164,13 @@ class CardGameControllerJson extends AbstractController
         return $response;
     }
 
-    #[Route("/api/deck/deal/{num_players<\d+>}/{num_cards<\d+>}", name: "api_card_deal")]
+    #[Route("/api/deck/deal/{numPlayers<\d+>}/{numCards<\d+>}", name: "api_card_deal")]
     public function deal(
-        Request $request,
         SessionInterface $session,
         // If I set $num to 1, it will be redirect error, but default value can't
         // be omitted, because then it will be error of not having all parameters
-        int $num_players = 0,
-        int $num_cards = 0
+        int $numPlayers = 0,
+        int $numCards = 0
     ): Response {
         // Get deck or init
         if ($session->get("card_deck") === null) {
@@ -189,25 +186,25 @@ class CardGameControllerJson extends AbstractController
         $hands = [];
 
         // Do some controlls, and send to home with message if not fullfilled
-        if ($num_cards == 0 || $num_players == 0) {
+        if ($numCards == 0 || $numPlayers == 0) {
             $message = 'You can\'t draw 0 cards and can\'t have 0 players.';
-        } elseif ($num_cards * $num_players > $deck->cardsInDeck()) {
+        } elseif ($numCards * $numPlayers > $deck->cardsInDeck()) {
             $message = 'You can\'t draw more cards than there is in the deck (' . $deck->cardsInDeck() . ').';
         } else {
             // All controlls are passed
 
             // Set number of players to session
-            $session->set("num_players", $num_players);
+            $session->set("num_players", $numPlayers);
 
             // Create players=HandOfCards
             $players = [];
-            for ($i = 1; $i <= $num_players; $i++) {
+            for ($i = 1; $i <= $numPlayers; $i++) {
                 $players[] = new CardHand('Player'.$i);
             }
 
             // Deal cards
             foreach($players as $player) {
-                for ($i = 1; $i <= $num_cards; $i++) {
+                for ($i = 1; $i <= $numCards; $i++) {
                     // Draw 1 card, returns array with 1 card
                     $draw = $deck->draw(1, true);
                     $player->add($draw[0]);

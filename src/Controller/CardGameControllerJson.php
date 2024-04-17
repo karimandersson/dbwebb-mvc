@@ -31,6 +31,7 @@ class CardGameControllerJson extends AbstractController
             $deck->shuffle();
             $session->set("card_deck", $deck);
         } else {
+            /** @var DeckOfCards $deck */
             $deck = $session->get("card_deck");
         }
 
@@ -60,6 +61,7 @@ class CardGameControllerJson extends AbstractController
             $deck->shuffle();
             $session->set("card_deck", $deck);
         } else {
+            /** @var DeckOfCards $deck */
             $deck = $session->get("card_deck");
         }
 
@@ -100,6 +102,7 @@ class CardGameControllerJson extends AbstractController
             $deck->shuffle();
             $session->set("card_deck", $deck);
         } else {
+            /** @var DeckOfCards $deck */
             $deck = $session->get("card_deck");
         }
 
@@ -137,6 +140,7 @@ class CardGameControllerJson extends AbstractController
             $deck->shuffle();
             $session->set("card_deck", $deck);
         } else {
+            /** @var DeckOfCards $deck */
             $deck = $session->get("card_deck");
         }
 
@@ -178,6 +182,7 @@ class CardGameControllerJson extends AbstractController
             $deck->shuffle();
             $session->set("card_deck", $deck);
         } else {
+            /** @var DeckOfCards $deck */
             $deck = $session->get("card_deck");
         }
 
@@ -206,6 +211,7 @@ class CardGameControllerJson extends AbstractController
             foreach($players as $player) {
                 for ($i = 1; $i <= $numCards; $i++) {
                     // Draw 1 card, returns array with 1 card
+                    /** @var array<Card> $draw */
                     $draw = $deck->draw(1, true);
                     $player->add($draw[0]);
                 }

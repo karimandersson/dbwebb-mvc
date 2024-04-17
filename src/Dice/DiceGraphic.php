@@ -19,8 +19,11 @@ class DiceGraphic extends Dice
         parent::__construct();
     }
 
+    /**
+     * @return string
+     */
     public function getAsString(): string
     {
-        return $this->representation[$this->value - 1];
+        return (string) $this->representation[$this->value - 1];
     }
 }

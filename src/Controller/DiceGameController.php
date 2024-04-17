@@ -7,6 +7,7 @@ use App\Dice\DiceGraphic;
 use App\Dice\DiceHand;
 
 use Exception;
+// use stdClass;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -159,6 +160,7 @@ class DiceGameController extends AbstractController
     public function play(
         SessionInterface $session
     ): Response {
+        /** @var DiceHand $dicehand */
         $dicehand = $session->get("pig_dicehand");
 
         $data = [
@@ -167,7 +169,7 @@ class DiceGameController extends AbstractController
             "pigTotal" => $session->get("pig_total"),
             "diceValues" => $dicehand->getString(),
             "session" => json_encode($session->all(), JSON_PRETTY_PRINT),
-            "dv" => implode(',', $session->get("pig_dicehand")->getValues()),
+            "dv" => implode(',', $dicehand->getValues()),
             "sess" => $session->all()
         ];
 
@@ -186,6 +188,7 @@ class DiceGameController extends AbstractController
     public function roll(
         SessionInterface $session
     ): Response {
+        /** @var DiceHand $hand */
         $hand = $session->get("pig_dicehand");
         $hand->roll();
 

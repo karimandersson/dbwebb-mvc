@@ -22,6 +22,9 @@ class Dice
         return $this->value;
     }
 
+    /**
+     * @return string
+     */
     public function getAsString(): string
     {
         return "[{$this->value}]";

@@ -107,10 +107,16 @@ class CardGameControllerJson extends AbstractController
         }
 
         $message = '';
+        $drawedCards = [];
         if ($num <= $deck->cardsInDeck()) {
-            $drawedCards = $deck->draw($num, false);
+            // $drawedCards = $deck->draw($num, false);
+            $drawed = $deck->draw($num);
+            foreach ($drawed as $card) {
+                if ($card !== null) {
+                    $drawedCards[] = $card->showCard();
+                }
+            } 
         } else {
-            $drawedCards = [];
             $message = 'You can\'t draw more cards than there is in the deck.';
         }
 
@@ -145,13 +151,18 @@ class CardGameControllerJson extends AbstractController
         }
 
         $message = '';
+        $drawedCards = [];
         if ($num == 0) {
-            $drawedCards = [];
             $message = 'You can\'t draw 0 cards.';
         } elseif ($num <= $deck->cardsInDeck()) {
-            $drawedCards = $deck->draw($num, false);
+            $drawed = $deck->draw($num);
+            foreach ($drawed as $card) {
+                if ($card !== null) {
+                    $drawedCards = $card->showCard();
+                }
+            } 
         } else {
-            $drawedCards = [];
+            // $drawedCards = [];
             $message = 'You can\'t draw more cards than there is in the deck.';
         }
 
@@ -212,7 +223,7 @@ class CardGameControllerJson extends AbstractController
                 for ($i = 1; $i <= $numCards; $i++) {
                     // Draw 1 card, returns array with 1 card
                     /** @var array<Card> $draw */
-                    $draw = $deck->draw(1, true);
+                    $draw = $deck->draw(1);
                     $player->add($draw[0]);
                 }
             }

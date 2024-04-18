@@ -138,16 +138,20 @@ class CardGameController extends AbstractController
             $deck = $session->get("card_deck");
         }
 
+        $drawedCards = [];
         if ($num == 0) {
-            $drawedCards = [];
             $this->addFlash(
                 'warning',
                 'You can\'t draw 0 cards.'
             );
         } elseif ($num <= $deck->cardsInDeck()) {
-            $drawedCards = $deck->draw($num, false);
+            $drawed = $deck->draw($num);
+            foreach ($drawed as $card) {
+                if ($card !== null) {
+                    $drawedCards[] = $card->showCard();
+                }
+            } 
         } else {
-            $drawedCards = [];
             $this->addFlash(
                 'warning',
                 'You can\'t draw more cards than there is in the deck.'
@@ -211,7 +215,7 @@ class CardGameController extends AbstractController
             for ($i = 1; $i <= $numCards; $i++) {
                 // Draw 1 card, returns array with 1 card
                 /** @var array<Card> $draw */
-                $draw = $deck->draw(1, true);
+                $draw = $deck->draw(1);
                 $player->add($draw[0]);
             }
         }

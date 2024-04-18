@@ -38,22 +38,16 @@ class DeckOfCards
     }
 
     /**
-     * @return array<int, Card|array{string, string|null}|null>
+     * @return array<int, Card|null>
      */
-    public function draw(int $num = 1, bool $returnObject = false): array
+    public function draw(int $num = 1): array
     {
         $drawedCards = [];
         if ($num > 0 && $num <= count($this->deck)) {
             for ($i = 0; $i < $num; $i++) {
-                // Return representation or object of Card
-                if ($returnObject) {
-                    $drawedCards[] = array_shift($this->deck);
-                } else {
-                    $drawedCards[] = array_shift($this->deck)->showCard();
-                }
+                $drawedCards[] = array_shift($this->deck);
             }
         }
-
         return $drawedCards;
     }
 

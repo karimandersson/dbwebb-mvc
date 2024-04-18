@@ -20,13 +20,13 @@ class CardGameController extends AbstractController
     public function home(
         SessionInterface $session
     ): Response {
-        // Get deck or init
-        if ($session->get("card_deck") === null) {
+        // Get deck, init if empty
+        /** @var DeckOfCards $deck */
+        $deck = $session->get("card_deck");
+        if ($deck == null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
-        } else {
-            $deck = $session->get("card_deck");
         }
 
         return $this->render('card/home.html.twig');
@@ -36,14 +36,13 @@ class CardGameController extends AbstractController
     public function deck(
         SessionInterface $session
     ): Response {
-        // Get deck or init
-        if ($session->get("card_deck") === null) {
+        // Get deck, init if empty
+        /** @var DeckOfCards $deck */
+        $deck = $session->get("card_deck");
+        if ($deck == null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
-        } else {
-            /** @var DeckOfCards $deck */
-            $deck = $session->get("card_deck");
         }
 
         // New init deck. Do not shuffle!
@@ -65,14 +64,13 @@ class CardGameController extends AbstractController
 
         $newDeck = false;
 
-        // Get deck or init
-        if ($session->get("card_deck") === null) {
+        // Get deck, init if empty
+        /** @var DeckOfCards $deck */
+        $deck = $session->get("card_deck");
+        if ($deck == null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
-        } else {
-            /** @var DeckOfCards $deck */
-            $deck = $session->get("card_deck");
         }
 
         // If deck is empty, reintialize
@@ -95,12 +93,12 @@ class CardGameController extends AbstractController
                 'notice',
                 'The old deck was empty. You got a new deck.'
             );
-        } else {
-            $this->addFlash(
-                'notice',
-                'The cards have been shuffled.'
-            );
         }
+
+        $this->addFlash(
+            'notice',
+            'The cards have been shuffled.'
+        );
 
         return $this->redirectToRoute('card_deck');
     }
@@ -109,11 +107,11 @@ class CardGameController extends AbstractController
     public function draw(
         Request $request
     ): Response {
+        $num = 1;
+
         // Get number of cards from start page
         if ($request->query->get('num_cards')) {
             $num = $request->query->get('num_cards');
-        } else {
-            $num = 1;
         }
 
         // return $this->redirect('../deck/draw/' . $num);
@@ -128,14 +126,13 @@ class CardGameController extends AbstractController
         // be omitted, because then it will be error of not having all parameters
         int $num = 0
     ): Response {
-        // Get deck or init
-        if ($session->get("card_deck") === null) {
+        // Get deck, init if empty
+        /** @var DeckOfCards $deck */
+        $deck = $session->get("card_deck");
+        if ($deck == null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
-        } else {
-            /** @var DeckOfCards $deck */
-            $deck = $session->get("card_deck");
         }
 
         $drawedCards = [];
@@ -151,7 +148,7 @@ class CardGameController extends AbstractController
                     $drawedCards[] = $card->showCard();
                 }
             } 
-        } else {
+        } elseif ($num > $deck->cardsInDeck()) {
             $this->addFlash(
                 'warning',
                 'You can\'t draw more cards than there is in the deck.'
@@ -174,15 +171,13 @@ class CardGameController extends AbstractController
         int $numPlayers = 0,
         int $numCards = 0
     ): Response {
-
-        // Get deck or init
-        if ($session->get("card_deck") === null) {
+        // Get deck, init if empty
+        /** @var DeckOfCards $deck */
+        $deck = $session->get("card_deck");
+        if ($deck == null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
-        } else {
-            /** @var DeckOfCards $deck */
-            $deck = $session->get("card_deck");
         }
 
         // Do some controlls, and send to home with message if not fullfilled

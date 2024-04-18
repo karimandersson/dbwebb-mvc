@@ -25,14 +25,13 @@ class CardGameControllerJson extends AbstractController
     public function deck(
         SessionInterface $session
     ): Response {
-        // Get deck or init
-        if ($session->get("card_deck") === null) {
+        // Get deck, init if empty
+        /** @var DeckOfCards $deck */
+        $deck = $session->get("card_deck");
+        if ($deck == null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
-        } else {
-            /** @var DeckOfCards $deck */
-            $deck = $session->get("card_deck");
         }
 
         // New init deck. Do not shuffle!
@@ -54,15 +53,13 @@ class CardGameControllerJson extends AbstractController
     public function deckShuffle(
         SessionInterface $session
     ): Response {
-
-        // Get deck or init
-        if ($session->get("card_deck") === null) {
+        // Get deck, init if empty
+        /** @var DeckOfCards $deck */
+        $deck = $session->get("card_deck");
+        if ($deck == null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
-        } else {
-            /** @var DeckOfCards $deck */
-            $deck = $session->get("card_deck");
         }
 
         // If deck is empty, reintialize
@@ -96,28 +93,25 @@ class CardGameControllerJson extends AbstractController
     ): Response {
         $num = 1;
 
-        // Get deck or init
-        if ($session->get("card_deck") === null) {
+        // Get deck, init if empty
+        /** @var DeckOfCards $deck */
+        $deck = $session->get("card_deck");
+        if ($deck == null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
-        } else {
-            /** @var DeckOfCards $deck */
-            $deck = $session->get("card_deck");
         }
 
-        $message = '';
         $drawedCards = [];
+        $message = 'You can\'t draw more cards than there is in the deck.';
         if ($num <= $deck->cardsInDeck()) {
-            // $drawedCards = $deck->draw($num, false);
+            $message = '';
             $drawed = $deck->draw($num);
             foreach ($drawed as $card) {
                 if ($card !== null) {
                     $drawedCards[] = $card->showCard();
                 }
             } 
-        } else {
-            $message = 'You can\'t draw more cards than there is in the deck.';
         }
 
         $data = [
@@ -140,30 +134,27 @@ class CardGameControllerJson extends AbstractController
         // be omitted, because then it will be error of not having all parameters
         int $num = 0
     ): Response {
-        // Get deck or init
-        if ($session->get("card_deck") === null) {
+        // Get deck, init if empty
+        /** @var DeckOfCards $deck */
+        $deck = $session->get("card_deck");
+        if ($deck == null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
-        } else {
-            /** @var DeckOfCards $deck */
-            $deck = $session->get("card_deck");
         }
 
-        $message = '';
         $drawedCards = [];
+        $message = 'You can\'t draw more cards than there is in the deck.';
         if ($num == 0) {
             $message = 'You can\'t draw 0 cards.';
         } elseif ($num <= $deck->cardsInDeck()) {
+            $message = '';
             $drawed = $deck->draw($num);
             foreach ($drawed as $card) {
                 if ($card !== null) {
                     $drawedCards = $card->showCard();
                 }
             } 
-        } else {
-            // $drawedCards = [];
-            $message = 'You can\'t draw more cards than there is in the deck.';
         }
 
         $data = [
@@ -187,14 +178,13 @@ class CardGameControllerJson extends AbstractController
         int $numPlayers = 0,
         int $numCards = 0
     ): Response {
-        // Get deck or init
-        if ($session->get("card_deck") === null) {
+        // Get deck, init if empty
+        /** @var DeckOfCards $deck */
+        $deck = $session->get("card_deck");
+        if ($deck == null) {
             $deck = new DeckOfCards();
             $deck->shuffle();
             $session->set("card_deck", $deck);
-        } else {
-            /** @var DeckOfCards $deck */
-            $deck = $session->get("card_deck");
         }
 
         // Init some variables
@@ -204,41 +194,65 @@ class CardGameControllerJson extends AbstractController
         // Do some controlls, and send to home with message if not fullfilled
         if ($numCards == 0 || $numPlayers == 0) {
             $message = 'You can\'t draw 0 cards and can\'t have 0 players.';
+
+            $data = [
+                "message" => $message,
+                "deck" => $deck->showDeck(),
+                "hands" => $hands
+            ];
+    
+            $response = new JsonResponse($data);
+            $response->setEncodingOptions(
+                $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            );
+            return $response;
         } elseif ($numCards * $numPlayers > $deck->cardsInDeck()) {
             $message = 'You can\'t draw more cards than there is in the deck (' . $deck->cardsInDeck() . ').';
-        } else {
-            // All controlls are passed
 
-            // Set number of players to session
-            $session->set("num_players", $numPlayers);
+            $data = [
+                "message" => $message,
+                "deck" => $deck->showDeck(),
+                "hands" => $hands
+            ];
+    
+            $response = new JsonResponse($data);
+            $response->setEncodingOptions(
+                $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            );
+            return $response;
+        }
 
-            // Create players=HandOfCards
-            $players = [];
-            for ($i = 1; $i <= $numPlayers; $i++) {
-                $players[] = new CardHand('Player'.$i);
+        // All controlls are passed
+
+        // Set number of players to session
+        $session->set("num_players", $numPlayers);
+
+        // Create players=HandOfCards
+        $players = [];
+        for ($i = 1; $i <= $numPlayers; $i++) {
+            $players[] = new CardHand('Player'.$i);
+        }
+
+        // Deal cards
+        foreach($players as $player) {
+            for ($i = 1; $i <= $numCards; $i++) {
+                // Draw 1 card, returns array with 1 card
+                /** @var array<Card> $draw */
+                $draw = $deck->draw(1);
+                $player->add($draw[0]);
             }
+        }
 
-            // Deal cards
-            foreach($players as $player) {
-                for ($i = 1; $i <= $numCards; $i++) {
-                    // Draw 1 card, returns array with 1 card
-                    /** @var array<Card> $draw */
-                    $draw = $deck->draw(1);
-                    $player->add($draw[0]);
-                }
-            }
+        // Save to session
+        $session->set("card_deck", $deck);
+        $session->set("players", $players);
 
-            // Save to session
-            $session->set("card_deck", $deck);
-            $session->set("players", $players);
-
-            // Hands
-            foreach($players as $player) {
-                $hands[] = [
-                    "name" => $player->getName(),
-                    "hand" => $player->showHand()
-                ];
-            }
+        // Hands
+        foreach($players as $player) {
+            $hands[] = [
+                "name" => $player->getName(),
+                "hand" => $player->showHand()
+            ];
         }
 
         $data = [

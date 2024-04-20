@@ -147,7 +147,7 @@ class CardGameController extends AbstractController
                 if ($card !== null) {
                     $drawedCards[] = $card->showCard();
                 }
-            } 
+            }
         } elseif ($num > $deck->cardsInDeck()) {
             $this->addFlash(
                 'warning',
@@ -235,5 +235,4 @@ class CardGameController extends AbstractController
 
         return $this->render('card/deal.html.twig', $data);
     }
-
 }

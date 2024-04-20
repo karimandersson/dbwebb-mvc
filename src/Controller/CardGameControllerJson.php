@@ -16,11 +16,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CardGameControllerJson extends AbstractController
 {
-    /*
-    #[Route("/api/deck/draw", name: "api_card_draw")]
-    #[Route("/api/deck/draw/:number", name: "api_card_draw_number")]
-    */
-
     #[Route("/api/deck", name: "api_card_deck")]
     public function deck(
         SessionInterface $session
@@ -111,7 +106,7 @@ class CardGameControllerJson extends AbstractController
                 if ($card !== null) {
                     $drawedCards[] = $card->showCard();
                 }
-            } 
+            }
         }
 
         $data = [
@@ -154,7 +149,7 @@ class CardGameControllerJson extends AbstractController
                 if ($card !== null) {
                     $drawedCards = $card->showCard();
                 }
-            } 
+            }
         }
 
         $data = [
@@ -200,7 +195,7 @@ class CardGameControllerJson extends AbstractController
                 "deck" => $deck->showDeck(),
                 "hands" => $hands
             ];
-    
+
             $response = new JsonResponse($data);
             $response->setEncodingOptions(
                 $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -214,7 +209,7 @@ class CardGameControllerJson extends AbstractController
                 "deck" => $deck->showDeck(),
                 "hands" => $hands
             ];
-    
+
             $response = new JsonResponse($data);
             $response->setEncodingOptions(
                 $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -267,5 +262,4 @@ class CardGameControllerJson extends AbstractController
         );
         return $response;
     }
-
 }

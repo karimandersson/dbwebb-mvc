@@ -17,9 +17,29 @@ class DeckOfCards
         }
     }
 
+    /**
+     * Shuffle the cards
+     *
+     * @return void
+     */
     public function shuffle(): void
     {
         shuffle($this->deck);
+    }
+
+    /**
+     * New deck and shuffle
+     *
+     * @return void
+     */
+    public function newDeckAndShuffle(): void
+    {
+        // Empty the deck
+        $this->deck = [];
+        // Init new full deck
+        $this->__construct();
+        // Shuffle
+        $this->shuffle();
     }
 
     /**

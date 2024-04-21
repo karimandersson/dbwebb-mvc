@@ -84,6 +84,7 @@ class CardGameController extends AbstractController
 
         // Shuffle deck
         $deck->shuffle();
+        // $deck->newDeckAndShuffle();
 
         // Save to session
         $session->set("card_deck", $deck);

@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}21-spel{% endblock %}
+
+{% block body %}
+<h1>21-kortspel</h1>
+
+{{ include('general/flash.html.twig') }}
+
+<p>Välkommen till att spela kortspelet "21".</p>
+
+<p><a href="{{ path('game21_doc') }}">Läs dokumentation om spelet</a></p>
+<p><a href="{{ path('game21_play') }}?banklevel=1">Börja spela</a> - banken har svårighetsgrad 1</p>
+
+<h2>Spelregler</h2>
+<p>Spelet går ut på att komma på 21 eller så nära som möjligt underifrån. Allt över 21 innebär att du förlorar. 
+    Ess är värda 1 eller 14.</p>
+<p>Du spelar mot banken. Banken vinner vid lika. Du vinner om du har högre än banken, eller om banken får över 21.</p>
+<p>Du väljer själv om du vill plocka ett nytt kort eller avsluta, och efter det är det bankens tur att spela.</p>
+
+<h3>Svårighetsgrader på banken</h3>
+<ul>
+    <li>1: Banken stannar på 17</li>
+</ul>
+
+{% endblock %}

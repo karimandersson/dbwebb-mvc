@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block title %}21-spel{% endblock %}
+
+{% block body %}
+<h1>21-kortspel</h1>
+
+{{ include('general/flash.html.twig') }}
+
+<p>Dokumentation om kortspelet "21".</p>
+
+<h2>Om spelet</h2>
+<p>Spelet.....</p>
+
+<h2>Om klasserna</h2>
+<p>Grunden är en Card-klass som innehåller grunderna till ett spelkort och textbaserade representationer av dessa. Det
+    finns interna metoder som visar kortet, men den publika metoden är showCard (som är samma som i CardGraphic). Till
+    showCard skulle jag kunnat gjort ett interface, men har inte gjort det (ännu). Man anger färg och värde när man skapar
+    kortet i constructorn.
+</p>
+<p>CardGraphic är en ärvd klass till Card. Den utökar med grafisk representation av kortet med hjälp av svg-bilder. Som
+    redan nämts används showCard för att visa, och den returnerar alltid (dvs från båda klasserna) en array med 2 värden;
+    en textrepresentation och en grafisk representation (som är tom om original Card). Utdatafunktionerna kollar om
+    det finns en grafisk representation eller inte, och visar kortet därefter.
+</p>
+<p>DeckOfCard är kortleksklassen. När den skapas skapas 52 kort upp. Den har metoder för att blanda, visa upp sig, 
+    ge kort (antal kort samt bool om man ska returnera grafiskt eller som objekt) samt metod för att se hur många kort som är kvar.
+</p>
+<p>CardHand representerar en korthand eller en spelare om man så vill. Den skapas med ett namn, och sedan kan man lägga
+    till kort (ett i taget). Man kan visa upp handen och se hur många kort den har.
+</p>
+<p>Jag har kommit fram till att både DeckOfCard och CardHand är aggregrationer av Card/CardGraphic. Båda kan verka utan
+    att innehålla kort. Dock måste DeckOfCard skapas med kort i sig, så det är ett gränsfall och skulle kunna vara komposition
+    istället. </p>
+<figure>
+    <img src="{{ asset('img/uml.png') }}" alt="klassdiagram">
+    <figcaption class="figcaption">Klassdiagram skapat i draw.io</figcaption>
+</figure>
+
+{% endblock %}

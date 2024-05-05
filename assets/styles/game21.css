@@ -1,0 +1,9 @@
+.game21_container {
+    display: grid;
+    /* margin: 0 auto; */
+    grid-template-columns: auto;
+    /* grid-template-rows: auto; */
+
+    /* padding: 60px; */
+    row-gap: 1em;
+}

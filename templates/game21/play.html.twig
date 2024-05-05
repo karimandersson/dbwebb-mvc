@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}21-spel{% endblock %}
+
+{% block body %}
+<h1>21-kortspel</h1>
+
+{{ include('general/flash.html.twig') }}
+
+<div class="game21_container">
+    <div class="player">
+        <h2>Du</h2>
+        <div class="cards">
+
+        </div>
+        <p>Spelaren: {{ namePlayer1 }}</p>
+    </div>
+    <div class="bank">
+        <h2>Banken</h2>
+        <div class="cards">
+
+        </div>
+    </div>
+    <div class="usedcards">
+        <h2>Använda kort</h2>
+        <div class="cards">
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
